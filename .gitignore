@@ -1,0 +1,7 @@
+*.tar
+*.tar.gz
+
+build/bin/*
+
+esync-config.*
+esync.config
