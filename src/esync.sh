@@ -50,6 +50,35 @@ if [ "${#ARGS[1]}" == "0" ]; then
 	fi
 
 
+	## Setup config file
+	if [ "${ARGS[0]}" == "setup" ]; then
+		task "Setup esync // create config"
+
+		CONFIG_DIR="$HOME/.config"
+		CONFIG_PATH="${CONFIG_DIR}/esync.config"
+
+		actionsub "Creating config directory"
+		if ! isdirectory "${CONFIG_DIR}"; then
+			ERROR=$(mkdir -p "${CONFIG_DIR}" 2>&1)
+			onfail "" "${ERROR}"
+		fi
+		result "ok"
+
+		actionsub "Creating config file"
+		if ! isfile "${CONFIG_PATH}"; then
+			ERROR=$(touch "${CONFIG_PATH}" 2>&1)
+			onfail "" "${ERROR}"
+		fi
+		result "ok"
+
+		task "\nConfig location: ${CONFIG_PATH}"
+
+		echo
+		success "Setup complete"
+		exit
+	fi
+
+
 	## Update script to latest version
 	## (overwrites itself)
 	if [ "${ARGS[0]}" == "update" ]; then
