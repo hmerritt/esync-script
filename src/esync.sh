@@ -54,9 +54,6 @@ if [ "${#ARGS[1]}" == "0" ]; then
 	if [ "${ARGS[0]}" == "setup" ] || [ "${ARGS[0]}" == "init" ]; then
 		task "Setup esync // create config"
 
-		CONFIG_DIR="$HOME/.config"
-		CONFIG_PATH="${CONFIG_DIR}/esync.config"
-
 		actionsub "Creating config directory"
 		if ! isdirectory "${CONFIG_DIR}"; then
 			ERROR=$(mkdir -p "${CONFIG_DIR}" 2>&1)
@@ -146,4 +143,21 @@ fi
 ##------------------------------------------------------------------------------
 
 
+## Check if config file exists
+if isfile "${CONFIG_PATH}"; then
+
+	## Load config
+	source "${CONFIG_PATH}"
+
+else
+
+	## If config does NOT exist
+	error "\nUnable to open config file: ${CONFIG_PATH}"
+	warning "You can create a new config using: esync init"
+	exit 1
+
+fi
+
+
+## Sync using args
 sync "${ESYNC_LOCALPATH}" "${ESYNC_ADDRESS}" "${ESYNC_REMOTEPATH}"

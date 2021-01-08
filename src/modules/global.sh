@@ -14,7 +14,8 @@ SCRIPT_NAME="$(basename "$(test -L "$0" && readlink "$0" || echo "$0")")"
 ##------------------------------------------------------------------------------
 
 
-CONFIG_PATH="${ARGS[0]}"
+CONFIG_DIR="$HOME/.config"
+CONFIG_PATH="${CONFIG_DIR}/esync.config"
 
 
 CURRENT_ACTION=""
