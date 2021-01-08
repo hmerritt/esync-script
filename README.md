@@ -17,6 +17,7 @@ Install script dependencies via `install` argument.
 $ sudo ./esync.sh install
 ```
 
+
 #### Bash on Windows
 Thanks to `WSL`, you can run bash scripts on windows!
 
@@ -34,6 +35,11 @@ $ ./esync.sh cat.jpg admin@example.com /home/admin/images
 ```
 
 ### Config
+Create config via `init` argument.
+
+```bash
+$ sudo ./esync.sh init
+```
 
 #### Add server aliases
 Server aliases are custom names for a server address
@@ -46,7 +52,7 @@ esync.sh cat.jpg myserver /home/admin/images
 esync.sh cat.jpg admin@example.com /home/admin/images
 ```
 
-1. Open up the `esync` script
+1. Open up the `esync.config` in `~/.config/esync.config`
 2. Add the following line
 
 ```bash
