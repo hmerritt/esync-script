@@ -1,0 +1,18 @@
+language: bash
+
+before_script:
+  - cd build
+
+script:
+  - bash build.sh
+  - ls -R
+
+deploy:
+  provider: releases
+  api_key: $GITHUB_OAUTH_TOKEN
+  file:
+    - "bin/esync.sh"
+  skip_cleanup: true
+  on:
+    repo: hmerritt/esync-script
+    tags: true
