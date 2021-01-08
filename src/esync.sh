@@ -12,13 +12,6 @@ loadmodules "${modules}" "modules"
 ##------------------------------------------------------------------------------
 
 
-## Example alias
-## ESYNC_ADDRESS=$(sshalias "${ESYNC_ADDRESS}" "myserver" "admin@myserver.com")
-
-
-##------------------------------------------------------------------------------
-
-
 ## Check if
 if [ "${#ARGS[1]}" == "0" ]; then
 
@@ -46,6 +39,43 @@ if [ "${#ARGS[1]}" == "0" ]; then
 
 		echo
 		success "Install complete"
+		exit
+	fi
+
+
+	## Setup config file
+	if [ "${ARGS[0]}" == "setup" ] || [ "${ARGS[0]}" == "init" ]; then
+		task "Setup esync // create config"
+
+		actionsub "Creating config directory"
+		if ! isdirectory "${CONFIG_DIR}"; then
+			ERROR=$(mkdir -p "${CONFIG_DIR}" 2>&1)
+			onfail "" "${ERROR}"
+		fi
+		result "ok"
+
+		actionsub "Creating config file"
+		if ! isfile "${CONFIG_PATH}"; then
+			echo "## Esync Configuration File
+###########################
+
+
+## rsync variables
+SSH_LOCATION=\"\${HOME}/.ssh/id_rsa\"
+
+
+## Aliases
+## ESYNC_ADDRESS=\$(sshalias \"\${ESYNC_ADDRESS}\" \"myserver\" \"admin@myserver.com\")
+
+" >> "${CONFIG_PATH}"
+			onfail
+		fi
+		result "ok"
+
+		task "\nConfig location: ${CONFIG_PATH}"
+
+		echo
+		success "Setup complete"
 		exit
 	fi
 
@@ -117,4 +147,21 @@ fi
 ##------------------------------------------------------------------------------
 
 
+## Check if config file exists
+if isfile "${CONFIG_PATH}"; then
+
+	## Load config
+	source "${CONFIG_PATH}"
+
+else
+
+	## If config does NOT exist
+	error "\nUnable to open config file: ${CONFIG_PATH}"
+	warning "You can create a new config using: esync init"
+	exit 1
+
+fi
+
+
+## Sync using args
 sync "${ESYNC_LOCALPATH}" "${ESYNC_ADDRESS}" "${ESYNC_REMOTEPATH}"
