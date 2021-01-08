@@ -12,13 +12,6 @@ loadmodules "${modules}" "modules"
 ##------------------------------------------------------------------------------
 
 
-## Example alias
-## ESYNC_ADDRESS=$(sshalias "${ESYNC_ADDRESS}" "myserver" "admin@myserver.com")
-
-
-##------------------------------------------------------------------------------
-
-
 ## Check if
 if [ "${#ARGS[1]}" == "0" ]; then
 
@@ -63,8 +56,15 @@ if [ "${#ARGS[1]}" == "0" ]; then
 
 		actionsub "Creating config file"
 		if ! isfile "${CONFIG_PATH}"; then
-			ERROR=$(touch "${CONFIG_PATH}" 2>&1)
-			onfail "" "${ERROR}"
+			echo "## Esync Configuration File
+###########################
+
+
+## Aliases
+## ESYNC_ADDRESS=\$(sshalias \"\${ESYNC_ADDRESS}\" \"myserver\" \"admin@myserver.com\")
+
+" >> "${CONFIG_PATH}"
+			onfail
 		fi
 		result "ok"
 
