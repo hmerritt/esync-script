@@ -51,7 +51,7 @@ if [ "${#ARGS[1]}" == "0" ]; then
 
 
 	## Setup config file
-	if [ "${ARGS[0]}" == "setup" ]; then
+	if [ "${ARGS[0]}" == "setup" ] || [ "${ARGS[0]}" == "init" ]; then
 		task "Setup esync // create config"
 
 		CONFIG_DIR="$HOME/.config"
