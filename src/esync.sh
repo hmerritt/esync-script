@@ -12,6 +12,13 @@ loadmodules "${modules}" "modules"
 ##------------------------------------------------------------------------------
 
 
+## Example alias
+## ESYNC_ADDRESS=$(sshalias "${ESYNC_ADDRESS}" "myserver" "admin@myserver.com")
+
+
+##------------------------------------------------------------------------------
+
+
 ## Check if
 if [ "${#ARGS[1]}" == "0" ]; then
 
@@ -105,3 +112,9 @@ if [ "${#ARGS[1]}" == "0" ]; then
 
 
 fi
+
+
+##------------------------------------------------------------------------------
+
+
+sync "${ESYNC_LOCALPATH}" "${ESYNC_ADDRESS}" "${ESYNC_REMOTEPATH}"
