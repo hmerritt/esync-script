@@ -21,4 +21,5 @@ declare -a modules=(
 	"interface"
 	"process"
 	"files"
+	"args"
 )
