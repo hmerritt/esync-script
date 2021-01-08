@@ -39,10 +39,11 @@ isdirectory () {
 ## - $2: remote user and address
 ## - $3: remote path to sync
 sync () {
-	## Use fallback value for SSH_LOCATION
+	## Use fallback value for config vars
 	SSH_LOCATION=$(fallback "${SSH_LOCATION}" "${HOME}/.ssh/id_rsa")
+	RSYNC_ARGS=$(fallback "${RSYNC_ARGS}" "-av")
 
 	# esync cat.jpg $server images
 	# rsync -e "ssh -i ~/.ssh/id_rsa" -avz cat.jpg user@server.com:/home/user/images
-	rsync -e "ssh -i ${SSH_LOCATION}" -avz "${1}" "${2}":"${3}"
+	rsync -e "ssh -i ${SSH_LOCATION}" ${RSYNC_ARGS} "${1}" "${2}":"${3}"
 }

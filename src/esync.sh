@@ -62,6 +62,7 @@ if [ "${#ARGS[1]}" == "0" ]; then
 
 ## rsync variables
 SSH_LOCATION=\"\${HOME}/.ssh/id_rsa\"
+RSYNC_ARGS=\"-av\"
 
 
 ## Aliases
