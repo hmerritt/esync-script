@@ -41,5 +41,5 @@ isdirectory () {
 sync () {
 	# esync cat.jpg $server images
 	# rsync -e "ssh -i ~/.ssh/id_rsa" -avz cat.jpg user@server.com:/home/user/images
-	rsync -e "ssh -i ~/.ssh/id_rsa" -avz $1 $2:$3
+	rsync -e "ssh -i ~/.ssh/id_rsa" -avz "${1}" "${2}":"${3}"
 }
