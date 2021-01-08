@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-VERSION="0.1.4"
+VERSION="0.1.5"
 
 
 ##------------------------------------------------------------------------------
@@ -14,7 +14,7 @@ SCRIPT_NAME="$(basename "$(test -L "$0" && readlink "$0" || echo "$0")")"
 ##------------------------------------------------------------------------------
 
 
-CONFIG_DIR="$HOME/.config"
+CONFIG_DIR="${HOME}/.config"
 CONFIG_PATH="${CONFIG_DIR}/esync.config"
 
 

@@ -60,6 +60,10 @@ if [ "${#ARGS[1]}" == "0" ]; then
 ###########################
 
 
+## rsync variables
+SSH_LOCATION=\"\${HOME}/.ssh/id_rsa\"
+
+
 ## Aliases
 ## ESYNC_ADDRESS=\$(sshalias \"\${ESYNC_ADDRESS}\" \"myserver\" \"admin@myserver.com\")
 
