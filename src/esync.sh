@@ -12,6 +12,14 @@ loadmodules "${modules}" "modules"
 ##------------------------------------------------------------------------------
 
 
+## Error if no arguments are provided
+if [ "${#ARGS[0]}" == "0" ]; then
+	red "Error: Missing required arguments"
+	red "Usage: esync <local-file> <remote-address> <remote-path> [rsync-options]"
+	exit 1
+fi
+
+
 ## Check if
 if [ "${#ARGS[1]}" == "0" ]; then
 
