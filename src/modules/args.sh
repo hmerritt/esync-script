@@ -5,6 +5,7 @@
 ESYNC_LOCALPATH="${ARGS[0]}"
 ESYNC_ADDRESS="${ARGS[1]}"
 ESYNC_REMOTEPATH="${ARGS[2]}"
+ESYNC_RSYNC_ARGS_OVERRIDE="${@:4}"
 
 
 ##------------------------------------------------------------------------------

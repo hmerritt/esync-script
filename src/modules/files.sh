@@ -41,9 +41,12 @@ isdirectory () {
 sync () {
 	## Use fallback value for config vars
 	SSH_LOCATION=$(fallback "${SSH_LOCATION}" "${HOME}/.ssh/id_rsa")
-	RSYNC_ARGS=$(fallback "${RSYNC_ARGS}" "-av")
+
+	## Apply rsync args override, fallback to config-file, and then hardcoded defaults
+	RSYNC_ARGS_ACTUAL=$(fallback "${ESYNC_RSYNC_ARGS_OVERRIDE}" "${RSYNC_ARGS}")
+	RSYNC_ARGS_ACTUAL=$(fallback "${RSYNC_ARGS_ACTUAL}" "-av")
 
 	# esync cat.jpg $server images
 	# rsync -e "ssh -i ~/.ssh/id_rsa" -avz cat.jpg user@server.com:/home/user/images
-	rsync -e "ssh -i ${SSH_LOCATION}" ${RSYNC_ARGS} "${1}" "${2}":"${3}"
+	rsync -e "ssh -i ${SSH_LOCATION}" ${RSYNC_ARGS_ACTUAL} "${1}" "${2}":"${3}"
 }
